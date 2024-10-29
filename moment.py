@@ -82,7 +82,7 @@ if st.session_state.text_error:
 
 if st.session_state.tweet:
     st.markdown("""---""")
-    tweet = st.text_area(label="Your Mood Moments", value=st.session_state.tweet, height=100)
+    tweet = st.text_area(label="Your Mood Moments", value=name+": "+st.session_state.tweet, height=100)
 text_spinner_placeholder = st.empty()
 st.button(
      label="save your Moments",
