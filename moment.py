@@ -57,7 +57,7 @@ def generate_text(topic: str, mood: str = "", style: str = ""):
     	             )
             msg = response.choices[0].message.content
             st.session_state.tweet = msg
-            st.session_state.name = name
+            
             return msg
 def show_moments():
     lines = open("mood_moments.txt", "r",  encoding="utf-8").readlines()
@@ -67,7 +67,7 @@ def show_moments():
 def save_moment():
 # Store the nickname and generated message to a text file 
     with open("mood_moments.txt", "a",  encoding="utf-8") as f:  
-        f.write(f"{st.session_state.name}\t{st.session_state.tweet}\n") # Store both the name and the message 
+        f.write(f"{name}\t{st.session_state.tweet}\n") # Store both the name and the message 
 
 st.session_state.feeling_lucky = not st.button(
         label="Generate text",
@@ -76,6 +76,14 @@ st.session_state.feeling_lucky = not st.button(
         args=(topic, mood),
     )
 
+
+if st.session_state.text_error:
+    st.error(st.session_state.text_error)
+
+if st.session_state.tweet:
+    st.markdown("""---""")
+    st.text_area(label="Your Mood Moments", value=st.session_state.tweet, height=100)
+text_spinner_placeholder = st.empty()
 st.button(
      label="save your Moments",
      type="primary",
@@ -86,12 +94,4 @@ st.button(
      type="primary",
      on_click=show_moments
     )
-
-if st.session_state.text_error:
-    st.error(st.session_state.text_error)
-
-if st.session_state.tweet:
-    st.markdown("""---""")
-    st.text_area(label="Your Mood Moments", value=st.session_state.tweet, height=100)
-text_spinner_placeholder = st.empty()
 
