@@ -12,7 +12,7 @@ import streamlit as st
 from audio_recorder_streamlit import audio_recorder
 from utils import audio_bytes_to_wav, speech_to_text, text_to_speech, get_llm_response, create_welcome_message
 
-st.title("🎤 :blue[Psychologist Voice Chatbot] 💬🤖")
+st.title("🎤 :blue[Your Peer Voice Chatbot] 💬🤖")
 
 # Initialize chat history if not already present
 if "chat_history" not in st.session_state:
@@ -28,7 +28,7 @@ if "played_audios" not in st.session_state:
 if len(st.session_state.chat_history) == 0:
     welcome_audio_path = create_welcome_message()
     st.session_state.chat_history = [
-        AIMessage(content="Hello, I'm your psychologist chatbot assistant. How can I help you?", audio_file=welcome_audio_path)
+        AIMessage(content="Hello, I'm your peer assistant and let's practice speaking together.", audio_file=welcome_audio_path)
     ]
     st.session_state.played_audios[welcome_audio_path] = False
 
@@ -81,7 +81,7 @@ with st.sidebar:
         # Initialize a new chat history with the default welcome message
         welcome_audio_path = create_welcome_message()
         st.session_state.chat_history = [
-            AIMessage(content="Hello, I'm your psychologist chatbot assistant. How can I help you?", audio_file=welcome_audio_path)
+            AIMessage(content="Hello, I'm your peer assistant and let's practice speaking together.", audio_file=welcome_audio_path)
         ]
         st.session_state.played_audios[welcome_audio_path] = False
 
