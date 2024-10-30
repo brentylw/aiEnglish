@@ -118,31 +118,6 @@ def generate_pdf(questions):
 
     return pdf.output(dest="S").encode("latin1")
 
-def main():
-    st.title("Exam Creator")
-    
-    if "app_mode" not in st.session_state:
-        st.session_state.app_mode = "Upload PDF & Generate Questions"
-    
-    app_mode_options = ["Upload PDF & Generate Questions", "Take the Quiz", "Download as PDF"]
-    st.session_state.app_mode = st.sidebar.selectbox("Choose the app mode", app_mode_options, index=app_mode_options.index(st.session_state.app_mode))
-    
-    # API Key input
-    #api_key = st.text_input("Enter your OpenAI API Key:", type="password")
-    api_key = "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"
-    if st.session_state.app_mode == "Upload PDF & Generate Questions":
-        pdf_upload_app(api_key)
-    elif st.session_state.app_mode == "Take the Quiz":
-        if 'mc_test_generated' in st.session_state and st.session_state.mc_test_generated:
-            if 'generated_questions' in st.session_state and st.session_state.generated_questions:
-                mc_quiz_app()
-            else:
-                st.warning("No generated questions found. Please upload a PDF and generate questions first.")
-        else:
-            st.warning("Please upload a PDF and generate questions first.")
-    elif st.session_state.app_mode == "Download as PDF":
-        download_pdf_app()
-
 def pdf_upload_app(api_key):
     st.subheader("Upload Your Content - Create Your Test Exam")
     st.write("Upload the content and we take care of the rest")
@@ -268,5 +243,27 @@ def download_pdf_app():
             mime="application/pdf"
         )
 
-if __name__ == '__main__':
-    main()
+
+st.title("Exam Creator")
+
+if "app_mode" not in st.session_state:
+    st.session_state.app_mode = "Upload PDF & Generate Questions"
+
+app_mode_options = ["Upload PDF & Generate Questions", "Take the Quiz", "Download as PDF"]
+st.session_state.app_mode = st.sidebar.selectbox("Choose the app mode", app_mode_options, index=app_mode_options.index(st.session_state.app_mode))
+
+# API Key input
+#api_key = st.text_input("Enter your OpenAI API Key:", type="password")
+api_key = "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"
+if st.session_state.app_mode == "Upload PDF & Generate Questions":
+    pdf_upload_app(api_key)
+elif st.session_state.app_mode == "Take the Quiz":
+    if 'mc_test_generated' in st.session_state and st.session_state.mc_test_generated:
+        if 'generated_questions' in st.session_state and st.session_state.generated_questions:
+            mc_quiz_app()
+        else:
+            st.warning("No generated questions found. Please upload a PDF and generate questions first.")
+    else:
+        st.warning("Please upload a PDF and generate questions first.")
+elif st.session_state.app_mode == "Download as PDF":
+    download_pdf_app()
