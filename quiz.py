@@ -5,10 +5,6 @@ import json
 from PyPDF2 import PdfReader
 from fpdf import FPDF
 from groq import Groq
-# Set page config
-st.set_page_config(page_title="Exam Creator", page_icon="📝")
-
-__version__ = "1.2.0"
 
 # Main app functions
 def stream_llm_response(messages, model_params, api_key):
