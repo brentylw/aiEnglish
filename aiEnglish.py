@@ -15,7 +15,7 @@ chat = st.Page("chatbot.py", title="Chat with LLMs", icon=":material/security:")
 quiz =  st.Page("quiz.py", title="Quiz maker", icon=":material/security:")
 voicechat=  st.Page("voicechat/voicechat.py", title="Voice Chat", icon=":material/security:")
 
-pages = [home, moment, chat, quiz, voice chat]
+pages = [home, moment, chat, quiz, voicechat]
 
 st.title("AI Assited Language Teaching")
 
