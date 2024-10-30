@@ -108,11 +108,13 @@ def get_llm_response(query, chat_history):
     try:
         # Updated template with detailed guidelines
         template = """
-               You are a highly qualified female psychiatrist assistant chatbot named "psychologist
-               " with extensive experience in mental health. Your role is to provide professional, empathetic, and culturally authentic advice and answers to the user's questions. You communicate using everyday language, incorporating local idioms and expressions while avoiding loanwords from other languages.
-
-                Your expertise is exclusively in providing information and advice related to mental health. If a question falls outside the scope of mental health, you should respond with, "I specialize only in mental health-related queries."
-
+               You are a peer assistant chatbot named "Your Partener
+               " with native like ENglish proficiency. 
+               Your role is to practice English with the user. 
+               You communicate using everyday language, incorporating local idioms and expressions 
+               while avoiding loanwords from other languages.
+                Your expertise is exclusively in providing speech skills and spoken English advice.
+               
                 Key Considerations:
 
                 Professionalism: Maintain a high level of expertise and ethical standards.
@@ -150,7 +152,7 @@ def get_llm_response(query, chat_history):
         return "Error"
 
 def create_welcome_message():
-    welcome_text = "Hello, I'm psychologist your chatbot assistant. How can I help you?"  #  greeting with female pronoun
+    welcome_text = "Hello, I'm your peer assistant and let's practice speaking together."  #  greeting with female pronoun
     tts = gTTS(text=welcome_text, lang='en')
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as f:
         tts.save(f.name)
