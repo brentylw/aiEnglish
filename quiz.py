@@ -13,7 +13,7 @@ def stream_llm_response(messages, model_params, api_key):
         model=model_params["model"] if "model" in model_params else "llama3-8b-8192",
         messages=messages,
         temperature=model_params["temperature"] if "temperature" in model_params else 0.5,
-        max_tokens=10096,
+        max_tokens=5000,
     )
     return response.choices[0].message.content
 
