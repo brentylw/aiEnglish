@@ -14,7 +14,7 @@ from langchain_core.prompts import ChatPromptTemplate
 import streamlit as st
 import os 
 # Load the API key from Streamlit secrets
-api_key = st.secrets['secrets']["API_KEY"]
+api_key = "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"
 
 # Initialize the Groq client
 client = Groq(api_key=api_key)
