@@ -13,8 +13,6 @@ from audio_recorder_streamlit import audio_recorder
 from utils import audio_bytes_to_wav, speech_to_text, text_to_speech, get_llm_response, create_welcome_message
 
 st.title("🎤 :blue[Psychologist Voice Chatbot] 💬🤖")
-st.sidebar.markdown("# Aibytec")
-st.sidebar.image('logo.jpg', width=20, use_column_width=True)
 
 # Initialize chat history if not already present
 if "chat_history" not in st.session_state:
