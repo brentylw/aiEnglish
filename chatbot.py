@@ -4,7 +4,7 @@ from openai import OpenAI
 with st.sidebar:
     st.title("Multi-LLM Chatbot")
     llmodel = st.selectbox("Choose an LLM", ["ChatGPT", "Llama-3", "文心一言", "通义前言"])
-    openai_api_key = st.text_input("API Key", key="chatbot_api_key", type="password")
+    openai_api_key = st.text_input("API Key", key="chatbot_api_key", type="password", value="123")
 
 st.caption("🚀 A Streamlit chatbot")
 if "messages" not in st.session_state:
