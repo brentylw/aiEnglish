@@ -24,7 +24,7 @@ if prompt := st.chat_input():
 
     client = OpenAI(
       base_url=model_url,
-      api_key=openai_api_key
+      api_key="sk-umH9cf34da865f51e5b07d829a28bac29d8cac32594pvwsD"
   )
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
