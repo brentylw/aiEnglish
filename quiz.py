@@ -4,7 +4,7 @@ from openai import OpenAI
 import json
 from PyPDF2 import PdfReader
 from fpdf import FPDF
-
+from groq import Groq
 # Set page config
 st.set_page_config(page_title="Exam Creator", page_icon="📝")
 
@@ -12,9 +12,9 @@ __version__ = "1.2.0"
 
 # Main app functions
 def stream_llm_response(messages, model_params, api_key):
-    client = OpenAI(api_key=api_key)
+    client = Groq(api_key=api_key)       
     response = client.chat.completions.create(
-        model=model_params["model"] if "model" in model_params else "gpt-4o-mini",
+        model=model_params["model"] if "model" in model_params else "llama3-8b-8192",
         messages=messages,
         temperature=model_params["temperature"] if "temperature" in model_params else 0.5,
         max_tokens=10096,
@@ -68,7 +68,7 @@ def generate_mc_questions(content_text, api_key):
         {"role": "user", "content": user_prompt},
     ]
     try:
-        response = stream_llm_response(messages, model_params={"model": "gpt-4o-mini", "temperature": 0.5}, api_key=api_key)
+        response = stream_llm_response(messages, model_params={"model": "llama3-8b-8192", "temperature": 0.5}, api_key=api_key)
         return response, None
     except Exception as e:
         return None, str(e)
@@ -132,8 +132,8 @@ def main():
     st.session_state.app_mode = st.sidebar.selectbox("Choose the app mode", app_mode_options, index=app_mode_options.index(st.session_state.app_mode))
     
     # API Key input
-    api_key = st.text_input("Enter your OpenAI API Key:", type="password")
-    
+    #api_key = st.text_input("Enter your OpenAI API Key:", type="password")
+    api_key = "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"
     if st.session_state.app_mode == "Upload PDF & Generate Questions":
         pdf_upload_app(api_key)
     elif st.session_state.app_mode == "Take the Quiz":
