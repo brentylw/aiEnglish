@@ -15,7 +15,7 @@ st.title("Mood Moments")
 name = st.text_input(label="Your Name", placeholder="Nickname ")
 topic = st.text_input(label="Topic", placeholder="Listening and Speaking ")
 mood = st.text_input(
-    label="Mood (e.g. inspirational, funny, serious) (optional)",
+    label="Mood (e.g. inspirational, funny, serious, satisfied, selfless, sensible, sharing, sociable, splendid,  sunny, supportive, sympathetic, thankful, thoughtful, touched) (optional)",
     placeholder="inspirational",
 )
 
@@ -62,7 +62,10 @@ def generate_text(topic: str, mood: str = "", style: str = ""):
 def show_moments():
     lines = open("mood_moments.txt", "r",  encoding="utf-8").readlines()
     for msg in lines:
-        st.chat_message("user").write(msg.split("\t")[0]+": "+msg.split("\t")[1])
+        try:
+           st.chat_message("user").write(msg.split("\t")[0]+": "+msg.split("\t")[1])
+        except:
+           st.chat_message("user").write("Missed moment")
 
 def save_moment():
 # Store the nickname and generated message to a text file 
