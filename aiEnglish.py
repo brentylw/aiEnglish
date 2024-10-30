@@ -12,7 +12,7 @@ moment = st.Page(
     icon=":material/person_add:"
 )
 chat = st.Page("chatbot.py", title="Chat with LLMs", icon=":material/security:")
-
+chatpdf =  st.Page("chatpdf.py", title="Chat with PDF", icon=":material/security:")
 
 pages = [home, moment, chat]
 
