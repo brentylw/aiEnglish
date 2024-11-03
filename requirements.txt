@@ -13,3 +13,4 @@ langchain-core==0.2.26
 langchain-groq==0.1.9
 python-dotenv==1.0.1
 spacy
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
