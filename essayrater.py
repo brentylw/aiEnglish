@@ -4,7 +4,6 @@ from io import BytesIO
 from PIL import Image
 import base64
 import baiduocr
-st.set_page_config(page_title='GPT-4 Vision', page_icon='👁️')
 
 if 'history' not in st.session_state:
     st.session_state['history'] = [{'role': 'system', 'content': ''}]
