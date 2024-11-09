@@ -78,10 +78,14 @@ with cols[0]:
                 model = "gpt-4o",
                 messages=history
             )
-        
+        mymsg = response.choices[0].message.content
 
         st.session_state['history'].append(
-            {'role': 'assistant', 'content': result}
+            {'role': 'assistant', 'content': mymsg}
+        )
+
+        st.session_state['history'].append(
+            {'role': 'assistant', 'content': mymsg}
         )
         st.rerun()
 
