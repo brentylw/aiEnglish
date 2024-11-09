@@ -6,4 +6,4 @@ st.write("""
 新时代学科教学（英语）专业硕士人才培养研讨会
 
 """)
-st.write("Your Language Learning Assistant. Created by a Language Enthusiasts for Language Learners.")
+st.write("Your Language Learning Assistant. By Linwei Yang at Yantai University")
