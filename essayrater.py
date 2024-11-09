@@ -16,19 +16,15 @@ for msg in st.session_state['history'][1:]:
     if msg['role'] == 'user':
         with st.chat_message('user'):
             for i in msg['content']:
-                if i['type'] == 'text':
-                    st.write(i['text'])
-                else:
-                    with st.expander('Attached Image'):
-                        img = Image.open(BytesIO(base64.b64decode(i['image_url']['url'][23:])))
-                        st.image(img)
+                with st.expander('Attached Image'):
+                    img = Image.open(BytesIO(base64.b64decode(i['image_url']['url'][23:])))
+                    st.image(img)
     else:
         with st.chat_message('assistant'):
             msg_content = ''.join(['  ' + char if char == '\n' else char for char in msg['content']])  # fixes display issue
             st.markdown('Assistant: ' + msg_content)
 
 # get user inputs
-text_input = st.text_input('Prompt', '')
 img_input = st.file_uploader('Images', accept_multiple_files=True)
 
 # set up button layout
@@ -52,20 +48,17 @@ cols = st.columns(2)
 with cols[0]:
     if st.button('Send'):
         
-        if not (text_input or img_input):
+        if not (img_input):
             st.warning('You can\'t just send nothing!')
             st.stop()
         msg = {'role': 'user', 'content': []}
-        if text_input:
-            msg['content'].append({'type': 'text', 'text': text_input})
-
         for img in img_input:
             if img.name.split('.')[-1].lower() not in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
                 st.warning('Only .jpg, .png, .gif, or .webp are supported')
                 st.stop()
             encoded_img = base64.b64encode(img.read()).decode('utf-8')
             result = baiduocr.ocr_image(encoded_img)
-            msg['content'].append({'type': 'text', 'text': result})
+            msg['content'].append({'type': 'text', 'text': "rating the essays:"+result})
 
         st.session_state['history'].append(msg)
         history = (
@@ -79,7 +72,7 @@ with cols[0]:
                 model = "gpt-4o",
                 messages=history
             )
-        mymsg = response.choices[0]['message']['content']
+        mymsg = response.choices[0].message.content
 
         st.session_state['history'].append(
             {'role': 'assistant', 'content': mymsg}
