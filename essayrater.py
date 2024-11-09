@@ -15,10 +15,7 @@ api_key = "sk-umH9cf34da865f51e5b07d829a28bac29d8cac32594pvwsD"
 for msg in st.session_state['history'][1:]:
     if msg['role'] == 'user':
         with st.chat_message('user'):
-            for i in msg['content']:
-                with st.expander('Attached Image'):
-                    img = Image.open(BytesIO(base64.b64decode(i['image_url']['url'][23:])))
-                    st.image(img)
+            st.write(msg['content'])
     else:
         with st.chat_message('assistant'):
             msg_content = ''.join(['  ' + char if char == '\n' else char for char in msg['content']])  # fixes display issue
