@@ -5,13 +5,13 @@ from PIL import Image
 import base64
 import baiduocr
 
-api_key = "sk-umH9cf34da865f51e5b07d829a28bac29d8cac32594pvwsD"
+
 if 'history' not in st.session_state:
     st.session_state['history'] = [{'role': 'system', 'content': ''}]
 
 st.markdown('# Handwriting Essay Rater')
-api_key = st.text_input('OpenAI API Key', value='111', type='password')
 
+api_key = "sk-umH9cf34da865f51e5b07d829a28bac29d8cac32594pvwsD"
 # display chat
 for msg in st.session_state['history'][1:]:
     if msg['role'] == 'user':
@@ -52,9 +52,7 @@ st.markdown(
 cols = st.columns(2)
 with cols[0]:
     if st.button('Send'):
-        if not api_key:
-            st.warning('API Key required')
-            st.stop()
+        
         if not (text_input or img_input):
             st.warning('You can\'t just send nothing!')
             st.stop()
