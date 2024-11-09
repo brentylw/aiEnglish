@@ -56,15 +56,13 @@ with cols[0]:
             st.warning('You can\'t just send nothing!')
             st.stop()
         msg = {'role': 'user', 'content': []}
-        if text_input:
-            msg['content'].append({'type': 'text', 'text': text_input})
         for img in img_input:
             if img.name.split('.')[-1].lower() not in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
                 st.warning('Only .jpg, .png, .gif, or .webp are supported')
                 st.stop()
             encoded_img = base64.b64encode(img.read()).decode('utf-8')
             result = baiduocr.ocr_image(encoded_img)
-            msg['content'].append(result)
+            msg['content'].append({'type': 'text', 'text': result})
             
         st.session_state['history'].append(msg)
         history = (
