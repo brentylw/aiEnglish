@@ -10,8 +10,6 @@ if 'history' not in st.session_state:
     st.session_state['history'] = [{'role': 'system', 'content': ''}]
 
 st.markdown('# Handwriting Essay Rater')
-api_key = st.text_input('OpenAI API Key', value='111', type='password')
-
 api_key = "sk-umH9cf34da865f51e5b07d829a28bac29d8cac32594pvwsD"
 # display chat
 for msg in st.session_state['history'][1:]:
@@ -30,8 +28,8 @@ for msg in st.session_state['history'][1:]:
             st.markdown('Assistant: ' + msg_content)
 
 # get user inputs
-text_input = st.text_input('Prompt', '', key=st.session_state['counters'][0])
-img_input = st.file_uploader('Images', accept_multiple_files=True, key=st.session_state['counters'][1])
+text_input = st.text_input('Prompt', '')
+img_input = st.file_uploader('Images', accept_multiple_files=True)
 
 # set up button layout
 st.markdown(
