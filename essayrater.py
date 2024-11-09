@@ -50,5 +50,41 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 cols = st.columns(2)
+with cols[0]:
+    if st.button('Send'):
+        if not api_key:
+            st.warning('API Key required')
+            st.stop()
+        if not (text_input or img_input):
+            st.warning('You can\'t just send nothing!')
+            st.stop()
+        msg = {'role': 'user', 'content': []}
+        if text_input:
+            msg['content'].append({'type': 'text', 'text': text_input})
+        for img in img_input:
+            if img.name.split('.')[-1].lower() not in ['png', 'jpg', 'jpeg', 'gif', 'webp']:
+                st.warning('Only .jpg, .png, .gif, or .webp are supported')
+                st.stop()
+            encoded_img = base64.b64encode(img.read()).decode('utf-8')
+            result = baiduocr.ocr_image(encoded_img)
+            msg['content'].append(result)
+            
+        st.session_state['history'].append(msg)
+        history = (
+            st.session_state['history']
+            if st.session_state['history'][0]['content']
+            else st.session_state['history'][1:]
+        )
 
+        client = OpenAI(base_url="https://api.gptsapi.net/v1", api_key=api_key)
+            response = client.chat.completions.create(
+                model = "gpt-4o",
+                messages=history
+            )
+        
+
+        st.session_state['history'].append(
+            {'role': 'assistant', 'content': result}
+        )
+        st.rerun()
 
