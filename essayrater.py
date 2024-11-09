@@ -10,6 +10,7 @@ if 'history' not in st.session_state:
     st.session_state['history'] = [{'role': 'system', 'content': ''}]
 
 st.markdown('# Handwriting Essay Rater')
+api_key = st.text_input('OpenAI API Key', value='111', type='password')
 
 api_key = "sk-umH9cf34da865f51e5b07d829a28bac29d8cac32594pvwsD"
 # display chat
