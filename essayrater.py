@@ -70,4 +70,27 @@ with cols[0]:
             msg['content'].append(result)
             
         st.session_state['history'].append(msg)
+        history = (
+            st.session_state['history']
+            if st.session_state['history'][0]['content']
+            else st.session_state['history'][1:]
+        )
+
+        client = OpenAI(base_url="https://api.gptsapi.net/v1", api_key=api_key)
+        response = client.chat.completions.create(
+                model = "gpt-4o",
+                messages=history
+            )
+        
+
+        st.session_state['history'].append(
+            {'role': 'assistant', 'content': result}
+        )
+        st.rerun()
+
+# clear chat history
+with cols[1]:
+    if st.button('Clear'):
+        st.session_state['history'] = [st.session_state['history'][0]]
+        st.rerun()
 
