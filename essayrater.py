@@ -22,7 +22,7 @@ for msg in st.session_state['history'][1:]:
             st.markdown('Assistant: ' + msg_content)
 
 # get user inputs
-prom = st.text_area(label, value="Rate the essays.")
+prom = st.text_input(label, value="Rate the essays.")
 img_input = st.file_uploader('Images', accept_multiple_files=True)
 
 # set up button layout
