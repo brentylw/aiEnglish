@@ -22,6 +22,7 @@ for msg in st.session_state['history'][1:]:
             st.markdown('Assistant: ' + msg_content)
 
 # get user inputs
+prom = st.text_area(label, value="Rate the essays.")
 img_input = st.file_uploader('Images', accept_multiple_files=True)
 
 # set up button layout
@@ -55,7 +56,7 @@ with cols[0]:
                 st.stop()
             encoded_img = base64.b64encode(img.read()).decode('utf-8')
             result = baiduocr.ocr_image(encoded_img)
-            msg['content'].append({'type': 'text', 'text': "rating the essays:"+result})
+            msg['content'].append({'type': 'text', 'text': prom +":"+result})
 
         st.session_state['history'].append(msg)
         history = (
