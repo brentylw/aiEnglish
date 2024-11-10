@@ -6,5 +6,9 @@ st.write("""
 新时代学科教学（英语）专业硕士人才培养研讨会
 
 """)
-st.write("<a href="case_data.rar">下载案例所需的资料</a>")
+st.download_button(
+        label="Download case_data",
+        data=csv_data,
+        file_name='case_data.rar'
+    )
 st.write("Your Language Learning Assistant. By Linwei Yang at Yantai University")
