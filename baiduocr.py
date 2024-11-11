@@ -38,6 +38,7 @@ def ocr_image(encodedimg):
     }
     
     response = requests.request("POST", url, headers=headers, data=content)
+    print(response.text)
     data = json.loads(response.text)
     extracted_words = [item['words'] for item in data['words_result']]  
     text = ""
